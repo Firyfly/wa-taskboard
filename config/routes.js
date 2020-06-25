@@ -14,9 +14,9 @@
   'pages' : {
     controller: PagesController,
     actions: [
-          {path: '/', action: 'index', method: 'get' },
-          {path: '/api/imprint', action: 'imprint', method: 'get' },
-          {path: '/api/signin', action: 'signin', method: 'get' }
+          {path: '', action: 'index', method: 'get' },
+          {path: '/imprint', action: 'imprint', method: 'get' },
+          {path: '/signin', action: 'signin', method: 'get' }
     ]
   },
 
@@ -25,7 +25,7 @@
       actions: [
         {path: '/api/users', action: 'index', method: 'get'},
         {path: '/api/signin', action: 'signin', method: 'post'},
-        {path: '/api/signup', action: 'sihnup', method: 'post'},
+        {path: '/api/signup', action: 'signup', method: 'post'},
         {path: '/api/users/:id', action: 'show', method: 'get'}   
       ]
     },
