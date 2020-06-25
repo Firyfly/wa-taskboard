@@ -14,7 +14,7 @@
   'pages' : {
     controller: PagesController,
     actions: [
-          {path: '/api/', action: 'index', method: 'get' },
+          {path: '/', action: 'index', method: 'get' },
           {path: '/api/imprint', action: 'imprint', method: 'get' },
           {path: '/api/signin', action: 'signin', method: 'get' }
     ]
