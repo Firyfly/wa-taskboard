@@ -32,9 +32,9 @@ app.ioHandler = socket;
  const router = new Router(app, routes,database);
  router.setup();
 
- app.get('/', (req,res) => {
+ /*app.get('/', (req,res) => {
     res.send('Hello World');
- })
+ })*/
 
  http.listen(process.env.PORT || 3000,function(){
     console.log('App listening at http://localhost:'+(process.env.PORT || 3000));
