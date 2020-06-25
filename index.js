@@ -36,8 +36,8 @@ app.ioHandler = socket;
     res.send('Hello World');
  })
 
- http.listen(3000,function(){
-    console.log('App listening at http://localhost:3000');
+ http.listen(process.env.PORT || 3000,function(){
+    console.log('App listening at http://localhost:'+(process.env.PORT || 3000));
  });
 
 
