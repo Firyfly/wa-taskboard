@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "grunt build && && sequelize-cli db:migrate", 
+    "build": "grunt build", 
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
