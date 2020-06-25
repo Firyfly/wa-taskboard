@@ -41,9 +41,9 @@
       controller: ApiMessagesController,
       actions: [
         {path: '/api/messages', action: 'index', method: 'get'}, 
+        {path: '/api/messages/:id', action: 'destroy', method: 'get'},
         {path: '/api/messages/:id', action: 'show', method: 'get'},
         {path: '/api/messages/:id', action: 'update', method: 'get'},
-        {path: '/api/messages/:id', action: 'destroy', method: 'get'},
       ]
     },
     'api/projects' : {
