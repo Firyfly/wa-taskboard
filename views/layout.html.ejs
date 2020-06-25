@@ -21,7 +21,7 @@
         <%-body%>
         <% if(self.req.user) {%>
         <script>
-              let currentUserId = <%-self.req.user.id%>;
+              let currentUserId = <% self.req.user.id %>
         </script>
         <% } %>
         <% for (let index = 0; index<self.jsFiles.length; index++){%>

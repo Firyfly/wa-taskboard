@@ -119,7 +119,7 @@ class ApiTasksController extends Controller{
         let task = null;
         let error = null;
 
-        try {
+        /*try {
             task = await self.db.sequelize.transaction(async(t) => {
 
                 let newTask = self.db.Task.build();
@@ -138,7 +138,7 @@ class ApiTasksController extends Controller{
         catch(err){
 
             error=err;
-        }
+        }*/
 
         if(error !== null){
 

@@ -33,9 +33,9 @@
                 '*/\n',
                 },
                 files: {
-                    'assets/css/layout.css' : 'src/less/layout.css',
-                    'assets/css/index.css' : 'src/less/index.css',
-                    'assets/css/signin.css' : 'src/less/signin.css'
+                    'assets/css/layout.css' : 'src/less/layout.less',
+                    'assets/css/index.css' : 'src/less/index.less',
+                    'assets/css/signin.css' : 'src/less/signin.less'
                 }
                 
             }
