@@ -1,36 +1,34 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('message', {
+    return queryInterface.createTable('workflow', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      text: {
+      name: {
         type: Sequelize.STRING(20),
         allowNull: false
       },
-      fromId: {
+      color: {
+        type: Sequelize.STRING(9),
+        allowNull: false,
+      },
+      sort: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: {
-            model: {
-              tableName: 'user'
-            },
-            key: 'id'
-        },
       },
-      toId: {
+      projectId: {
         type: Sequelize.INTEGER,
-        allowNull: true,
-        references: {
+        reference: {
             model: {
-              tableName: 'user'
+                tableName: 'project',
             },
             key: 'id'
         },
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
@@ -43,6 +41,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('message');
+    return queryInterface.dropTable('workflow');
   }
 };

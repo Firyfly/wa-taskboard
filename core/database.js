@@ -14,7 +14,7 @@ const fs = require('fs');
     const sequelize = new Sequelize(cfg.db.database, cfg.db.username, cfg.db.password, {
 
         host: cfg.db.host,
-        dialect: cfg.fb.dialect,
+        dialect: cfg.db.dialect,
         pool: {
               max: 5,
               min: 0,
@@ -48,7 +48,7 @@ const fs = require('fs');
 
 
         try{
-            let fixedModelName = modelName.charAt(0).toLowerCase() + modelNameslice(1);
+            let fixedModelName = modelName.charAt(0).toLowerCase() + modelName.slice(1);
             let filePath = path.join(__dirname,'..','models', fixedModelName + '.js');
             if(fs.existsSync(filePath)){
 

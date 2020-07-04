@@ -73,10 +73,10 @@
     urlFor(controller, action, params = null, method = 'GET'){
         const self=this;
         let hash = controller + action + method.toLowerCase();
-        let paramsKey = null;
+        let paramsKeys = null;
 
         if(params !== null){
-            paramsKey = Object.keys(params).sort();
+            paramsKeys = Object.keys(params).sort();
             hash += paramsKeys.join('');
         }
 

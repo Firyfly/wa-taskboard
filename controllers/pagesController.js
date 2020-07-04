@@ -22,7 +22,7 @@
             next();
             }
             else{
-                self.redirect(self.urlFor('Pages', 'signin'))
+                self.redirect(self.urlFor('pages', 'signin'))
             }
         });
 
@@ -37,7 +37,7 @@
         self.before(['signin'], (next) => {
             console.log('all pages');
             if(self.req.authorized === true){
-                self.redirect(self.urlFor('Pages', 'index'))
+                self.redirect(self.urlFor('pages', 'index'))
             }
             else{
                 next();
@@ -52,21 +52,46 @@
     }
 
 
-    actionIndex(){
+    async actionIndex(){
 
         const self = this;
-
+        
+        self.js('html5sortable')
         self.css('index');
         self.js('index');
 
-        self.db.User.findAll().then(users =>{
-            self.render({
+        const users = await self.db.User.findAll()
+        const workflows = await self.db.workflow.findAll({
+            where: {
+                projectId: 1
+            },
+            order: [
+                ['sort', ' ASC']
+            ],
+        })
 
-                title: 'Hello World',
-                users: users
+        const workflowTask = [];
+
+        for (let index = 0; index < array.length; index++){ 
+
+            const workflow = workflows[index];
+            workflowTasks[workflow.id] = await self.db.Task.findAll({
+                where: {
+                    workflowId: workflow.id,
+                    projectId: 1,
+                },
+                include: ['assignedTo']
             });
-            
+
+        }
+
+        self.render({
+            title: 'Kanban Project 1',
+            users: users,
+            workflows: workflows,
+            workflowTasks: workflowTasks
         });
+        
     }
 
     actionImprint(){

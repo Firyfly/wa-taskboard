@@ -7,6 +7,11 @@ module.exports = function(Model){
         return this.firstName + ' ' + this.lastName;
     };
 
+    Model.prototype.shortName = function(){
+
+        return this.firstName.charAt(0) + this.lastName.charAt(0);
+    };
+
 
     Model.prototype.writeRemotes= function(data){
 

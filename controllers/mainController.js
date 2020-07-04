@@ -16,7 +16,7 @@ class mainController extends Controller{
 
         const self = this;
 
-        self.jdFiles = [];
+        self.jsFiles = [];
         self.cssFiles =[];
 
         self.req.authorized = false;

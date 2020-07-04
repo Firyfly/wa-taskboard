@@ -117,7 +117,7 @@ class ApiUsersController extends Controller{
 
     try{
 
-        user = await self.db.User.findOne({
+        user = await self.db.user.findOne({
             where: {
                 email: remoteData.email
             }

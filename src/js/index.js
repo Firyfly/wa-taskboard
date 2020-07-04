@@ -178,3 +178,84 @@
 
 
     loadMessages(currentUserElm);
+
+
+
+////////////// Drag and Drop for Kanban
+let sortableLists = sortable('.tasks', {
+    forcePlaceholderSize: true,
+    placeholderClass: 'task-placeholder',
+    connectedWith: 'tasks',
+    hoverClass: 'dragging'
+})[0];
+
+for(let index = 0; index < sortableList.length ;index++){
+    const list = sortableList[index];
+
+    list.addEventListener('sortstart',function(e) {
+
+    });
+    
+    list.addEventListener('sortstop',function(e) {
+
+    });
+    
+    list.addEventListener('update',function(e) {
+    
+        
+        console.log('e', e);
+
+        let item = e.detail.item;
+        let target = e.target;
+
+
+        let line = item.querySelector('.line');
+
+            if(line){
+               line.style.background = target.getAttribute('data-workflow-color');
+            }
+
+
+        io.emit('task/move', {
+            id: item.getAttribute('data-id'),
+            workflowId: target.getAttribute('data-workflow-id'),
+            sort: Array.prototype.indexOf.call(tem.parentNode.children, item),
+        });
+       
+
+
+
+    });
+};
+
+io.on('task/move',(data) => {
+
+    let item = document.querySelector('.task[data-id="'+data.id+'"]');
+    if(item){
+
+        let taskList = document.querySelector('.task[data-workflow-id="'+data.workflowId+'"]');
+        if(taskList){
+            let index = data.sort;
+            if(taskList.children-length <= index + 1){
+                taskList.appendChild(item);
+            }
+            else{
+                let currentIndex = Array.prototype.indexOf.call(taskList.children, item);
+                if(index !== 0 && currentIndex !== -1 & Index >= currentIndex){
+                    index = index +1;
+                }
+
+                let sibling = taskList.children[index];
+                taskList.insertBefore(item, sibling);
+
+                let line = item.querySelector('.line');
+
+                if(line){
+                    line.style.background = taskList.getAttribute('data-workflow-color');
+                }
+            }
+
+            
+        }
+    }
+});

@@ -9,11 +9,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    sort: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 999999
+    },
   
   }, {
       tableName: 'task'
   });
-  /*Task.associate = function(models,User) {
+    Task.associate = function(models,User) {
     User.belongsTo(models.Task,{
       as: 'creator',
       foreignKey: 'creatorId'
@@ -29,6 +34,6 @@ module.exports = (sequelize, DataTypes) => {
       as: 'project',
       foreignKey: 'projectId'
     })
-  };*/
+  };
   return Task;
 };

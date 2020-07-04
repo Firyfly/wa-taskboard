@@ -9,7 +9,7 @@ module.exports = {
       email: 'j.doe@fh-erfurt.de',
       createdAt: new Date(),
       updatedAt: new Date(),
-      passwordHash: 'dfsfsddsfdsfdsfsdfd',
+      passwordHash: '$2y$12$KX33YX2fml.CRvwaTH4IYOIPdRbOD7h5g2OIclzdWJuqTF2NgT4cO',
       permission: 0b1111111111111111
     },
     {
@@ -19,7 +19,7 @@ module.exports = {
       email: 'j.doerien@fh-erfurt.de',
       createdAt: new Date(),
       updatedAt: new Date(),
-      passwordHash: 'dfsfsddsfdsfdsfsdfd',
+      passwordHash: '$2y$12$KX33YX2fml.CRvwaTH4IYOIPdRbOD7h5g2OIclzdWJuqTF2NgT4cO',
       permission: 0b1111111111111111
     },], {});
   },
