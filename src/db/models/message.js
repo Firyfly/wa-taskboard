@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
 
     tableName: 'project'
   });
-  message.associate = function(models) {
+  /*message.associate = function(models) {
     MessageChannel.belongsTo(models.User,{
       as: 'from',
       foreignKey: 'fromId'
@@ -22,6 +22,6 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'toId'
 
     });
-  };
+  };*/
   return message;
 };

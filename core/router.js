@@ -4,7 +4,7 @@
  * @description
  */
 
- class Router{
+class Router{
 
     constructor(app, routes, database){
 

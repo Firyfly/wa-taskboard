@@ -120,7 +120,7 @@ const Passport = require('./passport.js');
 
             });
 
-            socket.on('task/move', (data) => {
+            socket.on('task/move', async (data) => {
 
                 let task = await self.db.Task.findOne({
                     where: {

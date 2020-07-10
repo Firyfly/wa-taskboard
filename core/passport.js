@@ -4,112 +4,112 @@
  * @description
  */
 
- const bcrypt = require('bcrypt');
- const crypto = require('crypto');
- const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
 
- class Passport{
+class Passport{
 
-    static generatePassword(length = 18){
-        let hash = crypto.randomBytes(length).toString('hex');
-        hash = hash.substring(0,length);
-        return hash;
-    }
+   static generatePassword(length = 18){
+       let hash = crypto.randomBytes(length).toString('hex');
+       hash = hash.substring(0,length);
+       return hash;
+   }
 
-    static hashPassword(str){
-        return bcrypt.hashSync(str, 10);
-    }
- 
-    static comparePassword(str,hash){
-        return bcrypt.compareSync(str, hash);
-    }
+   static hashPassword(str){
+       return bcrypt.hashSync(str, 10);
+   }
 
-    static generateJwt(){
+   static comparePassword(str,hash){
+       return bcrypt.compareSync(str, hash);
+   }
 
-        let payload ={
-            iat: Date.now(),
-            exp: Date.now() + cfg.jwtExpiresAfter,
-            id: userId
-        };
+   static generateJwt(){
 
-        return jwt.sign(payload, cfg.secret);
-    }
+       let payload ={
+           iat: Date.now(),
+           exp: Date.now() + cfg.jwtExpiresAfter,
+           id: userId
+       };
 
-    static isAuthorized(req){
-        const self = this;
+       return jwt.sign(payload, cfg.secret);
+   }
 
-        let cookies = self.cookies(req);
-        let token = null;
+   static isAuthorized(req){
+       const self = this;
 
-        if(cookies[cfg.cookieName]){
+       let cookies = self.cookies(req);
+       let token = null;
 
-            token = cookies[cfg.cookieName];
-        }
-        else if(req.headers && req.headers.authorization){
+       if(cookies[cfg.cookieName]){
 
-            token = req.headers.authorization.replace('Bearer','');
-        }
+           token = cookies[cfg.cookieName];
+       }
+       else if(req.headers && req.headers.authorization){
 
-        if(token !== null){
+           token = req.headers.authorization.replace('Bearer','');
+       }
 
-            try{
+       if(token !== null){
 
-                let payload = jwt.verify(token, cfg.secret);
-                if(payload){
+           try{
 
-                    if(payload.exp > Date.now()){
-                        return payload;
-                    }
-                }
+               let payload = jwt.verify(token, cfg.secret);
+               if(payload){
 
-
-
-            }
-            catch(err){
-
-                console.error(err);
-            }
-
-        }
-
-        return false;
-    }
+                   if(payload.exp > Date.now()){
+                       return payload;
+                   }
+               }
 
 
-    static authorizationUserWithCookies(re,res,userId){
 
-        const self = this;
-        let token = self.generateJwt(userId);
+           }
+           catch(err){
 
-        res.cookie(cfg.cookieName, token, {
-                maxAge: cfg.jwtExpiresAfter,
-                httpOnly: false,
-                secure: req.secure
+               console.error(err);
+           }
 
-        });
+       }
 
-        return token;
-    }
+       return false;
+   }
 
-    static cookies(req){
-        let cookies = {};
-        let _cookies = req.headers.cookies;
 
-        if(_cookies){
+   static authorizationUserWithCookies(re,res,userId){
 
-            _cookies = _cookies.split(';');
+       const self = this;
+       let token = self.generateJwt(userId);
 
-            let parts = null;
+       res.cookie(cfg.cookieName, token, {
+               maxAge: cfg.jwtExpiresAfter,
+               httpOnly: false,
+               secure: req.secure
 
-            for(let i = 0; i < _cookies.length; i++){
+       });
 
-                parts = _cookies[i].split('=');
-                cookies[parts[0].trim()] = parts[1];
-            }
-        }
-    return cookies;
-    }
+       return token;
+   }
+
+   static cookies(req){
+       let cookies = {};
+       let _cookies = req.headers.cookies;
+
+       if(_cookies){
+
+           _cookies = _cookies.split(';');
+
+           let parts = null;
+
+           for(let i = 0; i < _cookies.length; i++){
+
+               parts = _cookies[i].split('=');
+               cookies[parts[0].trim()] = parts[1];
+           }
+       }
+   return cookies;
+   }
 
 }
 
- module.exports = Passport;
+module.exports = Passport;

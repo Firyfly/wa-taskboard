@@ -4,118 +4,118 @@
  * @description
  */
 
- const Controller = require('./MainController.js');
+const Controller = require('./MainController.js');
 
- class PagesController extends Controller{
+class PagesController extends Controller{
 
-    constructor(...args){
+   constructor(...args){
 
-        super(...args);
+       super(...args);
 
-        const self = this;
+       const self = this;
 
-        self.css('layout');
+       self.css('layout');
 
-        self.before(['*','-imprint','-signin'], (next) => {
-            console.log('all pages');
-            if(self.req.authorized === true){
-            next();
-            }
-            else{
-                self.redirect(self.urlFor('pages', 'signin'))
-            }
-        });
+       self.before(['*','-imprint','-signin'], (next) => {
+           console.log('all pages');
+           if(self.req.authorized === true){
+           next();
+           }
+           else{
+               self.redirect(self.urlFor('pages', 'signin'))
+           }
+       });
 
-        self.before('index',(next) => {
-            console.log('only index');
+       self.before('index',(next) => {
+           console.log('only index');
 
-            next();
-        });
-
-
-
-        self.before(['signin'], (next) => {
-            console.log('all pages');
-            if(self.req.authorized === true){
-                self.redirect(self.urlFor('pages', 'index'))
-            }
-            else{
-                next();
-            }
-        });
-
-        self.before('index',(next) => {
-            console.log('only index');
-
-            next();
-        });
-    }
+           next();
+       });
 
 
-    async actionIndex(){
 
-        const self = this;
-        
-        self.js('html5sortable')
-        self.css('index');
-        self.js('index');
+       self.before(['signin'], (next) => {
+           console.log('all pages');
+           if(self.req.authorized === true){
+               self.redirect(self.urlFor('pages', 'index'))
+           }
+           else{
+               next();
+           }
+       });
 
-        const users = await self.db.User.findAll()
-        const workflows = await self.db.workflow.findAll({
-            where: {
-                projectId: 1
-            },
-            order: [
-                ['sort', ' ASC']
-            ],
-        })
+       self.before('index',(next) => {
+           console.log('only index');
 
-        const workflowTask = [];
+           next();
+       });
+   }
 
-        for (let index = 0; index < array.length; index++){ 
 
-            const workflow = workflows[index];
-            workflowTasks[workflow.id] = await self.db.Task.findAll({
-                where: {
-                    workflowId: workflow.id,
-                    projectId: 1,
-                },
-                include: ['assignedTo']
-            });
+   async actionIndex(){
 
-        }
+       const self = this;
+       
+       self.js('html5sortable')
+       self.css('index');
+       self.js('index');
 
-        self.render({
-            title: 'Kanban Project 1',
-            users: users,
-            workflows: workflows,
-            workflowTasks: workflowTasks
-        });
-        
-    }
+       const users = await self.db.User.findAll()
+       const workflows = await self.db.workflow.findAll({
+           where: {
+               projectId: 1
+           },
+           order: [
+               ['sort', ' ASC']
+           ],
+       })
 
-    actionImprint(){
+       const workflowTask = [];
 
-        const self = this;
+       for (let index = 0; index < array.length; index++){ 
 
-        self.render({
-            title: 'Imprint'
-        });
-    }
+           const workflow = workflows[index];
+           workflowTasks[workflow.id] = await self.db.Task.findAll({
+               where: {
+                   workflowId: workflow.id,
+                   projectId: 1,
+               },
+               include: ['assignedTo']
+           });
 
-    actionSignin(){
+       }
 
-        const self = this;
+       self.render({
+           title: 'Kanban Project 1',
+           users: users,
+           workflows: workflows,
+           workflowTasks: workflowTasks
+       });
+       
+   }
 
-        self.js('signin');
-        self.css('signin');
-        
-        self.render({
-            title: 'Login',
-            navigation: false
-        });
-    }
+   actionImprint(){
 
- }
- 
- module.exports = PagesController;
+       const self = this;
+
+       self.render({
+           title: 'Imprint'
+       });
+   }
+
+   actionSignin(){
+
+       const self = this;
+
+       self.js('signin');
+       self.css('signin');
+       
+       self.render({
+           title: 'Login',
+           navigation: false
+       });
+   }
+
+}
+
+module.exports = PagesController;

@@ -18,22 +18,22 @@ module.exports = (sequelize, DataTypes) => {
   }, {
       tableName: 'task'
   });
-    Task.associate = function(models,User) {
-    User.belongsTo(models.Task,{
+
+  Task.associate = function(models) {
+    Task.belongsTo(models.User, {
       as: 'creator',
       foreignKey: 'creatorId'
-      
-    })
-  
-    User.belongsTo(models.Task,{
+    });
+
+    Task.belongsTo(models.User, {
       as: 'assignedTo',
       foreignKey: 'assignedToId'
-    })
+    });
 
-    User.belongsTo(models.Task,{
+    Task.belongsTo(models.Project, {
       as: 'project',
       foreignKey: 'projectId'
-    })
+    });
   };
   return Task;
 };
